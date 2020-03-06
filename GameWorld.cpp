@@ -36,7 +36,21 @@ void GameWorld::displayEntireWorld() const {
         "U = Player/User",
         "G = Gold"
     };
+    string controls[11] = {
+        "--- Controls ---\t\t--Points--",
+        "i or I to move up   \t\t+5 points",
+        "k or K to move down \t\t+5 points",
+        "j or J to move left \t\t+5 points",
+        "l or L to move right\t\t+5 points",
+        "v or V to show nearby caves\t-2 points",
+        "c or C to show entire world\t-5 points",
+        " ",
+        "r or R to restart the game with the same player",
+        "n or N to restart the game with a new player",
+        "q or Q to end the game"
+    };
 
+    // display game and legend
     cout << "+";
     for (int col = 0; col < N_COL; ++col) cout << "---";
     cout << "+" << endl;
@@ -49,13 +63,18 @@ void GameWorld::displayEntireWorld() const {
 
         cout << "|";
         if (row != 4)
-            cout << "\t\t" << legend[row];
+            cout << "\t" << legend[row];
         cout << endl;
     }
 
     cout << "+";
     for (int col = 0; col < N_COL; ++col) cout << "---";
-    cout << "+" << endl;
+    cout << "+" << endl << endl;
+
+    // display controls
+    for (int i = 0; i < 11; ++i) {
+        cout << controls[i] << endl;
+    }
 
     cout << endl << endl;
 }
