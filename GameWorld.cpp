@@ -79,20 +79,18 @@ bool GameWorld::isPossible() {
             x += 1;
         else if (symbols.find(map[y][x - 1]) == string::npos && x != 0) // going left
             x -= 1;
-        else { // start a new path if hit a dead end
+        else { // retrace steps if hit a dead end
             i -= 2 ;
             y = positions[i + 1].row;
             x = positions[i + 1].col;
         }
-        if (map[y][x] == 'G')
-            possible = true;
-        if (i == 0)
-            trapped = true;
 
-        map[y][x] = '1';
-        displayEntireWorld();
-        cout << y << ' ' << x << ' ' << i << endl;
-        PAUSE;
+        if (map[y][x] == 'G') // at the gold
+            possible = true;
+        else if (i == 0)      // no possible path
+            trapped = true;
+        else
+            map[y][x] = '1';
     }
     
     // clean up map
@@ -102,8 +100,8 @@ bool GameWorld::isPossible() {
         if (map[y][x] == '1')
             map[y][x] = '\0';
         
+        y = (x == 4) ? y + 1 : y;
         x = (x == 4) ? 0 : x + 1;
-        y++;
     }
 
     map[pos.row][pos.col] = 'U';

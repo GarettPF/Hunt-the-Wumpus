@@ -15,8 +15,10 @@ int main() {
     GameWorld world;
     do {
         new (&world) GameWorld();
-        world.displayEntireWorld();
-    } while (world.isPossible() != true);
+    } while (!world.isPossible());
+
+    world.displayEntireWorld();
+    PAUSE;
 
     return 0;
 }
