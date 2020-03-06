@@ -1,2 +1,0 @@
-Game: 1; Player: Ian; Score: 10; Result: Won;
-Game: 2; Player: Ian; Score: 15; Result: Died;
