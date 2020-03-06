@@ -12,34 +12,44 @@ int main() {
     srand(time(NULL));
     system("cls");
 
-    int key = 0, done = 0;
-    string quit = "qQ";
-    bool won = false, 
+    int key = 0;
+    const string quit = "qQ";
+    bool done = false,
+         won = false, 
          alive = true;
 
-    // Creates a world that is possible to win
-    GameWorld world;
-    do {
-        new (&world) GameWorld();
-    } while (!world.isPossible());
+    string name;
 
+    while (!done) {
 
-    while (!done && !won && alive) {
-        // display current world
-        CLS;
-        world.displayWorld();
+        cout << "Enter your name: ";
+        cin >> name;
 
-        // get control events
-        key = getKeyControls();
-        controlEventHandler(key, &world);
+        // Creates a world that is possible to win
+        GameWorld world;
+        do {
+            new (&world) GameWorld();
+        } while (!world.isPossible());
 
-        // check game events
-        won = world.haveIWon();
-        alive = world.amIAlive();
+        world.playerName = name;
 
-        world.update();
+        while (!won && alive) {         // game loop
+            // display current world
+            CLS;
+            world.displayWorld();
 
-        if (quit.find(key) != string::npos) done = 1;
+            // get control events
+            key = getKeyControls();
+            controlEventHandler(key, &world);
+
+            // check game events
+            won = world.haveIWon();
+            alive = world.amIAlive();
+
+            world.update();
+
+            if (quit.find(key) != string::npos) done = true;
+        }
     }
 
     return 0;

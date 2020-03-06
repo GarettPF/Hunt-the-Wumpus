@@ -23,8 +23,10 @@ class GameWorld {
     private:
         char map[N_ROW][N_COL] = {{'\0'}};
         Location pos;
-        int points;
     public:
+        int points;
+        string playerName;
+        
         // Constructor
         GameWorld();
 
@@ -51,5 +53,7 @@ class GameWorld {
 int getKeyControls();
 
 void controlEventHandler(int key, GameWorld *game);
+
+void writeToFile(FILE infile, GameWorld game);
 
 #endif // _GAMEWORLD_H_

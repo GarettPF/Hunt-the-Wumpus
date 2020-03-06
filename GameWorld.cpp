@@ -4,6 +4,7 @@ GameWorld::GameWorld() {
     int n_pits = rand() % 6 + 5,
         row, col;
     char symbols[] = {'G','U','W'};
+    points = 0;
 
     // place the pits
     while (n_pits--) {
@@ -69,6 +70,10 @@ void GameWorld::displayWorld() const {
         cout << "|";
         if (row != 4)
             cout << "\t" << legend[row];
+        if (row == 0)
+            cout << "\t\tPlayer: " << playerName;
+        if (row == 1)
+            cout << "\t\tPoints: " << points;
         cout << endl;
     }
 
@@ -119,6 +124,10 @@ void GameWorld::displayEntireWorld() const {
         cout << "|";
         if (row != 4)
             cout << "\t" << legend[row];
+        if (row == 0)
+            cout << "\t\tPlayer: " << playerName;
+        if (row == 1)
+            cout << "\t\tPoints: " << points;
         cout << endl;
     }
 
@@ -183,6 +192,10 @@ void GameWorld::displayVisibleWorld() const {
         cout << "|";
         if (row != 4)
             cout << "\t" << legend[row];
+        if (row == 0)
+            cout << "\t\tPlayer: " << playerName;
+        if (row == 1)
+            cout << "\t\tPoints: " << points;
         cout << endl;
     }
 
@@ -286,7 +299,6 @@ bool GameWorld::amIAlive() const {
     return alive;
 }
 
-
 void GameWorld::update() {
     // locate old position
     int row = 0, col = 0;
@@ -320,42 +332,61 @@ int getKeyControls() {
 
 void controlEventHandler(int key, GameWorld *game) {
     CLS;
+    string name;
     switch (key) {
         case 'i':
         case 'I':
             game->moveUp();
+            game->points += 5;
             break;
         case 'k':
         case 'K':
             game->moveDown();
+            game->points += 5;
             break;
         case 'j':
         case 'J':
             game->moveLeft();
+            game->points += 5;
             break;
         case 'l':
         case 'L':
             game->moveRight();
+            game->points += 5;
             break;
         case 'v':
         case 'V':
             CLS;
             game->displayVisibleWorld();
+            game->points -= 2;
             PAUSE;
             break;
         case 'c':
         case 'C':
             CLS;
             game->displayEntireWorld();
+            game->points -= 5;
             PAUSE;
             break;
         case 'r':
         case 'R':
-            cout << "R pressed" << endl;
+            name = game->playerName;
+            do {
+                new (game) GameWorld();
+            } while (!game->isPossible());
+            game->playerName = name;
             break;
         case 'n':
         case 'N':
-            cout << "N pressed" << endl;
+            do {
+                new (game) GameWorld();
+            } while (!game->isPossible());
+            cout << "Enter a new name: ";
+            cin >> game->playerName;
             break;
     }
+}
+
+void writeToFile(FILE infile, GameWorld game) {
+    
 }
