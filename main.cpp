@@ -12,13 +12,21 @@ int main() {
     srand(time(NULL));
     system("cls");
 
+    int key = 0, done = 0;
+    string quit = "qQ";
+
+    // Creates a world that is possible to win
     GameWorld world;
     do {
         new (&world) GameWorld();
     } while (!world.isPossible());
-
     world.displayEntireWorld();
-    PAUSE;
+
+    while (!done) {
+        key = getKeyControls();
+        controlEventHandler(key, world);
+        if (quit.find(key) != string::npos) done = 1;
+    }
 
     return 0;
 }

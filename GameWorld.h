@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <string>
 #include <ctime>
+#include <conio.h>
 using namespace std;
 
 #define CLS system("cls")
@@ -41,5 +42,9 @@ class GameWorld {
         bool amIAlive() const;
         bool isPossible();
 };
+
+int getKeyControls();
+
+void controlEventHandler(int key, GameWorld game);
 
 #endif // _GAMEWORLD_H_

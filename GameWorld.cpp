@@ -127,3 +127,69 @@ bool GameWorld::isPossible() {
 
     return possible;
 }
+
+int getKeyControls() {
+    char key = 0;
+    do {
+        key = getch();
+    } while (
+        key != 'i' && key != 'I' &&
+        key != 'k' && key != 'K' &&
+        key != 'j' && key != 'J' &&
+        key != 'l' && key != 'L' &&
+        key != 'v' && key != 'V' &&
+        key != 'c' && key != 'C' &&
+        key != 'r' && key != 'R' &&
+        key != 'n' && key != 'N' &&
+        key != 'q' && key != 'Q' 
+    );
+    return key;
+}
+
+void controlEventHandler(int key, GameWorld game) {
+    CLS;
+    switch (key) {
+        case 'i':
+        case 'I':
+            cout << "I pressed" << endl;
+            // game.moveUp();
+            break;
+        case 'k':
+        case 'K':
+            cout << "K pressed" << endl;
+            // game.moveDown();
+            break;
+        case 'j':
+        case 'J':
+            cout << "J pressed" << endl;
+            // game.moveLeft();
+            break;
+        case 'l':
+        case 'L':
+            cout << "L pressed" << endl;
+            // game.moveRight();
+            break;
+        case 'v':
+        case 'V':
+            cout << "V pressed" << endl;
+            // game.displayVisibleWorld();
+            break;
+        case 'c':
+        case 'C':
+            cout << "C pressed" << endl;
+            // game.displayEntireWorld();
+            break;
+        case 'r':
+        case 'R':
+            cout << "R pressed" << endl;
+            break;
+        case 'n':
+        case 'N':
+            cout << "N pressed" << endl;
+            break;
+        case 'q':
+        case 'Q':
+            cout << "Q pressed" << endl;
+            break;
+    }
+}
