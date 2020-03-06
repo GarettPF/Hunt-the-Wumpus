@@ -128,6 +128,39 @@ bool GameWorld::isPossible() {
     return possible;
 }
 
+void GameWorld::moveUp() {
+    if (pos.row != 0)
+        pos.row -= 1;
+}
+
+void GameWorld::moveDown() {
+    if (pos.row != 4)
+        pos.row += 1;
+}
+
+void GameWorld::moveRight() {
+    if (pos.col != 4)
+        pos.col += 1;
+}
+
+void GameWorld::moveLeft() {
+    if (pos.col != 0)
+        pos.col -= 1;
+}
+
+void GameWorld::update() {
+    // locate old position
+    int row = 0, col = 0;
+    while (map[row][col] != 'U') {
+        row = (col == 4) ? row + 1 : row;
+        col = (col == 4) ? 0 : col + 1;
+    }
+    // remove old location
+    map[row][col] = '\0';
+
+    map[pos.row][pos.col] = 'U';
+}
+
 int getKeyControls() {
     char key = 0;
     do {
@@ -146,28 +179,24 @@ int getKeyControls() {
     return key;
 }
 
-void controlEventHandler(int key, GameWorld game) {
+void controlEventHandler(int key, GameWorld *game) {
     CLS;
     switch (key) {
         case 'i':
         case 'I':
-            cout << "I pressed" << endl;
-            // game.moveUp();
+            game->moveUp();
             break;
         case 'k':
         case 'K':
-            cout << "K pressed" << endl;
-            // game.moveDown();
+            game->moveDown();
             break;
         case 'j':
         case 'J':
-            cout << "J pressed" << endl;
-            // game.moveLeft();
+            game->moveLeft();
             break;
         case 'l':
         case 'L':
-            cout << "L pressed" << endl;
-            // game.moveRight();
+            game->moveRight();
             break;
         case 'v':
         case 'V':
@@ -186,10 +215,6 @@ void controlEventHandler(int key, GameWorld game) {
         case 'n':
         case 'N':
             cout << "N pressed" << endl;
-            break;
-        case 'q':
-        case 'Q':
-            cout << "Q pressed" << endl;
             break;
     }
 }

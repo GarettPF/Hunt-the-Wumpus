@@ -41,10 +41,13 @@ class GameWorld {
         bool haveIWon() const;
         bool amIAlive() const;
         bool isPossible();
+
+        // refresh map
+        void update();
 };
 
 int getKeyControls();
 
-void controlEventHandler(int key, GameWorld game);
+void controlEventHandler(int key, GameWorld *game);
 
 #endif // _GAMEWORLD_H_

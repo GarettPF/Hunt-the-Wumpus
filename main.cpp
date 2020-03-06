@@ -20,11 +20,23 @@ int main() {
     do {
         new (&world) GameWorld();
     } while (!world.isPossible());
-    world.displayEntireWorld();
+
 
     while (!done) {
+        // display current world
+        CLS;
+        world.displayEntireWorld();
+
+        // get control events
         key = getKeyControls();
-        controlEventHandler(key, world);
+        controlEventHandler(key, &world);
+
+        // check game events
+        
+
+
+        world.update();
+
         if (quit.find(key) != string::npos) done = 1;
     }
 
