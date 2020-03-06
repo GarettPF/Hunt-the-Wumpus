@@ -387,6 +387,11 @@ void controlEventHandler(int key, GameWorld *game) {
     }
 }
 
-void writeToFile(FILE infile, GameWorld game) {
-    
+void writeToFile(ofstream& outfile, GameWorld game, string status) {
+    static int game_n = 0;
+    game_n++;
+    outfile << "Game: " << game_n
+         << "; Player: " << game.playerName
+         << "; Score: " << game.points 
+         << "; Result: " << status << ';' << endl;
 }

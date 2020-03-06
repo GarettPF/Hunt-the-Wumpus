@@ -2,6 +2,7 @@
 #define _GAMEWORLD_H_
 
 #include <iostream>
+#include <fstream>
 #include <cstdlib>
 #include <string>
 #include <ctime>
@@ -54,6 +55,6 @@ int getKeyControls();
 
 void controlEventHandler(int key, GameWorld *game);
 
-void writeToFile(FILE infile, GameWorld game);
+void writeToFile(ofstream& outfile, GameWorld game, string status);
 
 #endif // _GAMEWORLD_H_

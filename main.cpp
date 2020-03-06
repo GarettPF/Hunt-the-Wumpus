@@ -17,11 +17,14 @@ int main() {
     bool done = false,
          won = false, 
          alive = true;
-
+    ofstream scores("GameScores.txt");
+    if (!scores.is_open())
+        return -1;
     string name;
 
     while (!done) {
-
+        won = false;
+        alive = true;
         cout << "Enter your name: ";
         cin >> name;
 
@@ -33,7 +36,7 @@ int main() {
 
         world.playerName = name;
 
-        while (!won && alive) {         // game loop
+        while (!done && !won && alive) {         // game loop
             // display current world
             CLS;
             world.displayWorld();
@@ -50,7 +53,24 @@ int main() {
 
             if (quit.find(key) != string::npos) done = true;
         }
+
+        // log results
+        if (won)
+            writeToFile(scores, world, "Won");
+        else if (!alive)
+            writeToFile(scores, world, "Died");
+        
+        if (!done) {
+            char answer;
+            do {
+                cout << "Do you want to play again (Y/n): ";
+                cin >> answer;
+            } while (answer != 'Y' && answer != 'y' && answer != 'n');
+            if (answer == 'n')
+                done = true;
+        }
     }
 
+    scores.close();
     return 0;
 }
