@@ -27,7 +27,7 @@ int main() {
     while (!done && !won && alive) {
         // display current world
         CLS;
-        world.displayEntireWorld();
+        world.displayWorld();
 
         // get control events
         key = getKeyControls();
@@ -36,7 +36,6 @@ int main() {
         // check game events
         won = world.haveIWon();
         alive = world.amIAlive();
-
 
         world.update();
 

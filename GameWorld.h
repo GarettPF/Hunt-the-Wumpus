@@ -29,6 +29,7 @@ class GameWorld {
         GameWorld();
 
         // display
+        void displayWorld() const;         // show player only
         void displayEntireWorld() const;   // cheat function
         void displayVisibleWorld() const;  // show adjacent spots
 

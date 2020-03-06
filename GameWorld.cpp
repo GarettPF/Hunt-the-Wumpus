@@ -29,6 +29,61 @@ GameWorld::GameWorld() {
     }
 }
 
+void GameWorld::displayWorld() const {
+    string legend[4] = {
+        "W = Wumpus",
+        "P = Pitt",
+        "U = Player/User",
+        "G = Gold"
+    };
+    string controls[11] = {
+        "--- Controls ---\t\t--Points--",
+        "i or I to move up   \t\t+5 points",
+        "k or K to move down \t\t+5 points",
+        "j or J to move left \t\t+5 points",
+        "l or L to move right\t\t+5 points",
+        "v or V to show nearby caves\t-2 points",
+        "c or C to show entire world\t-5 points",
+        " ",
+        "r or R to restart the game with the same player",
+        "n or N to restart the game with a new player",
+        "q or Q to end the game"
+    };
+
+    // display game and legend
+    cout << "+";
+    for (int col = 0; col < N_COL; ++col) cout << "---";
+    cout << "+" << endl;
+
+    for (int row = 0; row < N_ROW; ++row) {
+        cout << '|';
+        for (int col = 0; col < N_COL; ++col) {
+            cout << ' ';
+            if (map[row][col] == 'U')
+                cout << map[row][col];
+            else
+                cout << ' ';
+            cout << ' ';
+        }
+
+        cout << "|";
+        if (row != 4)
+            cout << "\t" << legend[row];
+        cout << endl;
+    }
+
+    cout << "+";
+    for (int col = 0; col < N_COL; ++col) cout << "---";
+    cout << "+" << endl << endl;
+
+    // display controls
+    for (int i = 0; i < 11; ++i) {
+        cout << controls[i] << endl;
+    }
+
+    cout << endl << endl;
+}
+
 void GameWorld::displayEntireWorld() const {
     string legend[4] = {
         "W = Wumpus",
@@ -61,6 +116,70 @@ void GameWorld::displayEntireWorld() const {
             cout << ' ' << map[row][col] << ' ';
         }
 
+        cout << "|";
+        if (row != 4)
+            cout << "\t" << legend[row];
+        cout << endl;
+    }
+
+    cout << "+";
+    for (int col = 0; col < N_COL; ++col) cout << "---";
+    cout << "+" << endl << endl;
+
+    // display controls
+    for (int i = 0; i < 11; ++i) {
+        cout << controls[i] << endl;
+    }
+
+    cout << endl << endl;
+}
+
+void GameWorld::displayVisibleWorld() const {
+    string legend[4] = {
+        "W = Wumpus",
+        "P = Pitt",
+        "U = Player/User",
+        "G = Gold"
+    };
+    string controls[11] = {
+        "--- Controls ---\t\t--Points--",
+        "i or I to move up   \t\t+5 points",
+        "k or K to move down \t\t+5 points",
+        "j or J to move left \t\t+5 points",
+        "l or L to move right\t\t+5 points",
+        "v or V to show nearby caves\t-2 points",
+        "c or C to show entire world\t-5 points",
+        " ",
+        "r or R to restart the game with the same player",
+        "n or N to restart the game with a new player",
+        "q or Q to end the game"
+    };
+
+    // display game and legend
+    cout << "+";
+    for (int col = 0; col < N_COL; ++col) cout << "---";
+    cout << "+" << endl;
+
+    for (int row = 0; row < N_ROW; ++row) {
+        cout << '|';
+        for (int col = 0; col < N_COL; ++col) {
+            cout << ' ';
+            if ((row + 1 == pos.row && col == pos.col) ||
+                (row - 1 == pos.row && col == pos.col) ||
+                (row == pos.row && col + 1 == pos.col) ||
+                (row == pos.row && col - 1 == pos.col) ||
+                (row + 1 == pos.row && col + 1 == pos.col) ||
+                (row + 1 == pos.row && col - 1 == pos.col) ||
+                (row - 1 == pos.row && col + 1 == pos.col) ||
+                (row - 1 == pos.row && col - 1 == pos.col) ||
+                (row == pos.row && col == pos.col))
+                cout << map[row][col];
+            else 
+                cout << ' ';
+            cout << ' ';
+        }
+
+        // legend
         cout << "|";
         if (row != 4)
             cout << "\t" << legend[row];
@@ -220,13 +339,15 @@ void controlEventHandler(int key, GameWorld *game) {
             break;
         case 'v':
         case 'V':
-            cout << "V pressed" << endl;
-            // game.displayVisibleWorld();
+            CLS;
+            game->displayVisibleWorld();
+            PAUSE;
             break;
         case 'c':
         case 'C':
-            cout << "C pressed" << endl;
-            // game.displayEntireWorld();
+            CLS;
+            game->displayEntireWorld();
+            PAUSE;
             break;
         case 'r':
         case 'R':
