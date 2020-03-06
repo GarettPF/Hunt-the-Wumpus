@@ -1,2 +1,2 @@
-Game: 1; Player: Ian; Score: 10; Result: Died;
-Game: 2; Player: Garett; Score: 15; Result: Won;
+Game: 1; Player: Ian; Score: 10; Result: Won;
+Game: 2; Player: Ian; Score: 15; Result: Died;

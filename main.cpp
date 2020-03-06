@@ -55,11 +55,16 @@ int main() {
         }
 
         // log results
-        if (won)
+        if (won) {
             writeToFile(scores, world, "Won");
-        else if (!alive)
+            cout << "You won " << world.playerName << endl;
+            world.displayEntireWorld();
+        }
+        else if (!alive) {
             writeToFile(scores, world, "Died");
-        
+            cout << "You died " << world.playerName << endl;
+            world.displayEntireWorld();
+        }
         if (!done) {
             char answer;
             do {
