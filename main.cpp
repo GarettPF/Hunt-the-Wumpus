@@ -14,6 +14,8 @@ int main() {
 
     int key = 0, done = 0;
     string quit = "qQ";
+    bool won = false, 
+         alive = true;
 
     // Creates a world that is possible to win
     GameWorld world;
@@ -22,7 +24,7 @@ int main() {
     } while (!world.isPossible());
 
 
-    while (!done) {
+    while (!done && !won && alive) {
         // display current world
         CLS;
         world.displayEntireWorld();
@@ -32,7 +34,8 @@ int main() {
         controlEventHandler(key, &world);
 
         // check game events
-        
+        won = world.haveIWon();
+        alive = world.amIAlive();
 
 
         world.update();

@@ -23,6 +23,7 @@ class GameWorld {
     private:
         char map[N_ROW][N_COL] = {{'\0'}};
         Location pos;
+        int points;
     public:
         // Constructor
         GameWorld();

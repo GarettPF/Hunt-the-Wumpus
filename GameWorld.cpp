@@ -148,6 +148,26 @@ void GameWorld::moveLeft() {
         pos.col -= 1;
 }
 
+bool GameWorld::haveIWon() const {
+    bool won = false;
+    
+    if (map[pos.row][pos.col] == 'G')
+        won = true;
+
+    return won;
+}
+
+bool GameWorld::amIAlive() const {
+    bool alive = true;
+    string waysToDie = "PW";
+
+    if (waysToDie.find(map[pos.row][pos.col]) != string::npos)
+        alive = false;
+
+    return alive;
+}
+
+
 void GameWorld::update() {
     // locate old position
     int row = 0, col = 0;
