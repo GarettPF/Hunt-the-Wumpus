@@ -51,10 +51,30 @@ class GameWorld {
         void update();
 };
 
+/*
+Function: getKeyControls
+Description: Used as a way to get key strokes from the user
+    @param void
+    @return the key ascii value
+*/
 int getKeyControls();
 
+/*
+Function: controlEventHandler
+Description: Determines what to do with the given key input
+    @param key      the key ascii value
+    @param *game    The address of the current game to change
+    @return void
+*/
 void controlEventHandler(int key, GameWorld *game);
 
+/*
+Function: writeToFile
+Description: write the game results to the results file
+    @param outfile  the output file stream
+    @param game     the game results
+    @param status   the status of the game
+*/
 void writeToFile(ofstream& outfile, GameWorld game, string status);
 
 #endif // _GAMEWORLD_H_

@@ -76,6 +76,8 @@ int main() {
         }
     }
 
+    CLS;
+    cout << "Come again!" << endl;
     scores.close();
     return 0;
 }

@@ -315,7 +315,7 @@ void GameWorld::update() {
 int getKeyControls() {
     char key = 0;
     do {
-        key = getch();
+        key = _getch();
     } while (
         key != 'i' && key != 'I' &&
         key != 'k' && key != 'K' &&
